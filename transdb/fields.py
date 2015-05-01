@@ -92,7 +92,7 @@ class TransField(models.Field):
             result.raw_data = {settings.LANGUAGE_CODE: value}
         return result
 
-    def get_db_prep_save(self, value):
+    def get_db_prep_save(self, value, connection):
         if not isinstance(value, TransDbValue):
             return value
         value = [u"'%s': '''%s'''" % (k, v) for k, v in value.raw_data.items()]
